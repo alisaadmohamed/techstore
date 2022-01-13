@@ -1,0 +1,15 @@
+schema---
+
+
+products---->(id,name,price,stock,cat_id-img,created_at)
+category---->(id,name,created_at)
+
+orders--->(id,name,email,phone,address,status,created_at)
+
+order(id,order_id,products_id,stock)
+
+
+
+----------------------
+
+admins (id , name , email , password , is_admin , created_at)
