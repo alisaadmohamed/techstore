@@ -15,4 +15,14 @@ class Product extends Db
 
     }
 
+    public function selectId($id, $col = "products.*")
+    {
+        $sql = "SELECT $col FROM $this->table
+        JOIN cats on
+         $this->table.cat_id = cats.id
+          WHERE  $this->table.id =$id";
+        $res = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_assoc($res);
+    }
+
 }

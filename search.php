@@ -21,10 +21,10 @@ $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, i
 	<!-- Home -->
 
 	<div class="home">
-    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?= URL;?>assets/images/shop_background.jpg"></div>
+    <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?=URL;?>assets/images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
 		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">Search results for:<?php echo $keyword ?> </h2>
+			<h2 class="home_title">Search results for:<?php echo $keyword ?></h2>
 		</div>
 	</div>
 
@@ -42,7 +42,7 @@ $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, i
 							<ul class="sidebar_categories">
 			<?php foreach($allCategory as $cat): ?>
 
-								<li><a href="category.php?id=<?= $cat['id']?>"><?= $cat['name']?></a></li>
+								<li><a href="category.php?id=<?=$cat['id']?>"><?= $cat['name']?></a></li>
 							<?php endforeach; ?>
 							</ul>
 						</div>
@@ -72,7 +72,7 @@ $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, i
                         <div class="product_price">$<?=$prod['price'];?></div>
                         <div class="product_name"><div><a href="#" tabindex="0"><?=$prod['name'];?></a></div></div>
                     </div>
-                    <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
+                    
                 </div>
 
 <?php   endforeach; ?>

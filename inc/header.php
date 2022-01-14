@@ -1,14 +1,17 @@
-<?php  include_once ("app.php"); ?>
+<?php include_once "app.php";?>
 
 
 <?php
 
+use TechStore\Classes\Cart;
 use TechStore\Classes\Models\Cats;
+
 $cats = new Cats;
-$allCategory =  $cats->selectAll("id,name");
+$allCategory = $cats->selectAll("id,name");
 
-
-
+$cart = new Cart;
+$cardCount = $cart->count();
+$cartTotal = $cart->total();
 
 ?>
 
@@ -25,20 +28,20 @@ $allCategory =  $cats->selectAll("id,name");
 <meta name="description" content="TechStore">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<link rel="stylesheet" type="text/css" href="<?= URL;?>/assets/css/bootstrap4/bootstrap.min.css">
-<link href="<?= URL;?>assets/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/plugins/slick-1.8.0/slick.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/main_styles.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/responsive.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/shop_styles.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/shop_responsive.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/product_styles.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/product_responsive.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/cart_styles.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/cart_responsive.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/contact_styles.css">
-<link rel="stylesheet" type="text/css" href="<?= URL;?>assets/css/contact_responsive.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>/assets/css/bootstrap4/bootstrap.min.css">
+<link href="<?=URL;?>assets/plugins/fontawesome-free-5.0.1/css/fontawesome-all.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/plugins/jquery-ui-1.12.1.custom/jquery-ui.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/plugins/slick-1.8.0/slick.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/main_styles.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/responsive.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/shop_styles.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/shop_responsive.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/product_styles.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/product_responsive.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/cart_styles.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/cart_responsive.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/contact_styles.css">
+<link rel="stylesheet" type="text/css" href="<?=URL;?>assets/css/contact_responsive.css">
 
 </head>
 
@@ -57,7 +60,7 @@ $allCategory =  $cats->selectAll("id,name");
                     <!-- Logo -->
                     <div class="col-lg-2 col-sm-3 col-3 order-1">
                         <div class="logo_container">
-                            <div class="logo"><a href="#">Techstore</a></div>
+                            <div class="logo"><a href="<?=URL;?>">Techstore</a></div>
                         </div>
                     </div>
 
@@ -66,7 +69,7 @@ $allCategory =  $cats->selectAll("id,name");
                         <div class="header_search">
                             <div class="header_search_content">
                                 <div class="header_search_form_container">
-                                    <form method="GET" action="<?= URL;?>search.php" class="header_search_form clearfix">
+                                    <form method="GET" action="<?=URL;?>search.php" class="header_search_form clearfix">
                                         <input type="search" name="keyword" required="required" class="header_search_input" placeholder="Search for products...">
                                         <div class="custom_dropdown">
                                             <div class="custom_dropdown_list">
@@ -82,7 +85,7 @@ $allCategory =  $cats->selectAll("id,name");
                                                 </ul>
                                             </div>
                                         </div>
-                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="<?= URL;?>assets/images/search.png" alt=""></button>
+                                        <button type="submit" class="header_search_button trans_300" value="Submit"><img src="<?=URL;?>assets/images/search.png" alt=""></button>
                                     </form>
                                 </div>
                             </div>
@@ -97,11 +100,11 @@ $allCategory =  $cats->selectAll("id,name");
                                 <div class="cart_container d-flex flex-row align-items-center justify-content-end">
                                     <div class="cart_icon">
                                         <img src="assets/images/cart.png" alt="">
-                                        <div class="cart_count"><span>10</span></div>
+                                        <div class="cart_count"><span><?=$cardCount?></span></div>
                                     </div>
                                     <div class="cart_content">
                                         <div class="cart_text"><a href="#">Cart</a></div>
-                                        <div class="cart_price">$85</div>
+                                        <div class="cart_price">$<?=$cartTotal;?></div>
                                     </div>
                                 </div>
                             </div>
@@ -131,17 +134,17 @@ $allCategory =  $cats->selectAll("id,name");
                                 <ul class="cat_menu">
 
 
-                                <?php foreach($allCategory as $cat): ?>
+                                <?php foreach ($allCategory as $cat): ?>
 
-                                    <li><a href="category.php?id=<?= $cat['id']?>"> <?=  $cat['name'] ?> <i class="fas fa-chevron-right ml-auto"></i></a></li>
-                                    <!-- <li><a href="#">Cameras & Photos<i class="fas fa-chevron-right"></i></a></li>
+                                    <li><a href="category.php?id=<?=$cat['id']?>"><?=$cat['name']?><i class="fas fa-chevron-right"></i></a></li>
+                                    <!--
                                     <li><a href="#">Smartphones & Tablets<i class="fas fa-chevron-right"></i></a></li>
                                     <li><a href="#">TV & Audio<i class="fas fa-chevron-right"></i></a></li>
                                     <li><a href="#">Gadgets<i class="fas fa-chevron-right"></i></a></li>
                                     <li><a href="#">Car Electronics<i class="fas fa-chevron-right"></i></a></li>
                                     <li><a href="#">Video Games & Consoles<i class="fas fa-chevron-right"></i></a></li>
                                     <li><a href="#">Accessories<i class="fas fa-chevron-right"></i></a></li> -->
-<?php endforeach;  ?>
+<?php endforeach;?>
                                 </ul>
                             </div>
 
@@ -149,8 +152,8 @@ $allCategory =  $cats->selectAll("id,name");
 
                             <div class="main_nav_menu ml-auto">
                                 <ul class="standard_dropdown main_nav_dropdown">
-                                    <li><a href="#">Home<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="<?= URL;?>products.php">All products<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="<?=URL;?>">Home<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="<?=URL;?>products.php">All products<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="#">Cart<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </div>

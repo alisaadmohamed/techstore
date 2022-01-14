@@ -6,7 +6,7 @@
 use TechStore\Classes\Models\Product;
 
 $produ = new Product;
-$pro = $produ->selectAll("id,name,price");
+$pro = $produ->selectAll("id,name,price,img");
 
 ?>
 
@@ -37,7 +37,7 @@ $pro = $produ->selectAll("id,name,price");
 
                                          <?php foreach ($allCategory as $cat): ?>
 
-                                <li><a href="category.php=id = <?= $cat['id']?>"><?= $cat['name']?></a></li>
+                                <li><a href="category.php?id=<?=$cat['id'];?>"> <?=$cat['name'];?></a></li>
 
                                 <?php endforeach;?>
                                 <!-- <li><a href="#">Cameras & Photos</a></li>
@@ -64,95 +64,24 @@ $pro = $produ->selectAll("id,name,price");
                         <div class="product_grid">
                             <div class="product_grid_border"></div>
 
-                            <!-- Product Item -->
+                       <?php  foreach($pro as $products): ?>
+                        
                             <div class="product_item">
                                 <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/1.jpg" alt=""></div>
+                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="<?= URL . 'uploads/' . $products['img']?>" alt=""></div>
                                 <div class="product_content">
-                                    <div class="product_price">$225</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Philips BT6900A</a></div></div>
+                                    <div class="product_price">$<?= $products['price']?></div>
+                                    <div class="product_name"><div><a href="product.php?id=<?= $products['id'];?>" tabindex="0"><?=$products['name']?></a></div></div>
                                 </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
-                            </div>
-
-                            <!-- Product Item -->
-                            <div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/2.jpg" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">$225</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Huawei MediaPad...</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
-                            </div>
-
-                            <!-- Product Item -->
-                            <div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/3.jpg" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">$379</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Apple iPod shuffle</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
-                            </div>
-
-                            <!-- Product Item -->
-                            <div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/4.jpg" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">$225</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Sony MDRZX310W</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
+                                
 
                             </div>
 
-                            <!-- Product Item -->
-                            <div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/5.jpg" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">$379</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">LUNA Smartphone</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
+                          <?php endforeach; ?>  
 
-                            </div>
-
-                            <!-- Product Item -->
-                            <div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/6.jpg" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">$379</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Canon IXUS 175...</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
-
-                            </div>
-
-                            <!-- Product Item -->
-                            <div class="product_item">
-                                <div class="product_border"></div>
-                                <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="uploads/7.jpg" alt=""></div>
-                                <div class="product_content">
-                                    <div class="product_price">$379</div>
-                                    <div class="product_name"><div><a href="#" tabindex="0">Canon STM Kit...</a></div></div>
-                                </div>
-                                <div class="product_fav"><i class="fas fa-cart-plus"></i></div>
-
-                            </div>
+                          
 
 
-                            <!-- Product Item -->
-                          iv>
-
-                            <!-- Product Item -->
-
-
-                            <!-- Product Item -->
 
 
                         </div>

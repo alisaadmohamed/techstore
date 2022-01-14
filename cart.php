@@ -1,4 +1,4 @@
-<?php  include ('inc/header.php')?>
+<?php include 'inc/header.php'?>
 
 
 
@@ -16,7 +16,7 @@
                         <div class="cart_items">
                             <ul class="cart_list">
                                 <li class="cart_item clearfix">
-                                    <div class="cart_item_image"><img src="<?= URL; ?>/assets/images/shopping_cart.jpg" alt=""></div>
+                                    <div class="cart_item_image"><img src="<?=URL;?>/assets/images/shopping_cart.jpg" alt=""></div>
                                     <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
                                         <div class="cart_item_name cart_info_col">
                                             <div class="cart_item_title">Name</div>
@@ -76,10 +76,15 @@
                             </div>
                             <div class="contact_form_text">
                                 <textarea id="contact_form_message" class="text_field contact_form_message" rows="4" placeholder="Your address"></textarea>
-                            </div>
+                                </div>
+
+                <?php if (!$cart->has($singProduct['price'])): ?>
+
                             <div class="contact_form_button">
                                 <button type="submit" class="button contact_submit_button">Submit Order</button>
                             </div>
+
+<?php endif;?>
                         </form>
 
                     </div>
@@ -92,4 +97,4 @@
     <!-- Copyright -->
 
 
-<?php  include ('inc/footer.php')?>
+<?php include 'inc/footer.php'?>
