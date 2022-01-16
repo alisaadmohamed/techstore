@@ -14,8 +14,13 @@ class Cart
 
     public function count()
     {
+        if (isset($_SESSION['cart'])) {
+            return count($_SESSION['cart']);
 
-        return count($_SESSION['cart']);
+        } else {
+            return 0;
+        }
+
     }
 
     public function total()
@@ -23,9 +28,13 @@ class Cart
 
         $total = 0;
 
-        foreach ($_SESSION['cart'] as $id => $productData) {
+        if (isset($_SESSION['cart'])) {
 
-            $total += $productData['qua'] * $productData['price'];
+            foreach ($_SESSION['cart'] as $id => $productData) {
+
+                $total += $productData['qua'] * $productData['price'];
+
+            }
 
         }
 
@@ -33,11 +42,17 @@ class Cart
 
     }
 
+    public function has($id)
+    {
 
+        if(!empty($id)) {
 
-    public function has($id) {
+            return array_key_exists($id, $_SESSION['cart']);
 
-         return array_key_exists($id,$_SESSION['cart']);
+        } 
+
+        return ;
+
     }
 
 }

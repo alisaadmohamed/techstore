@@ -78,13 +78,10 @@
                                 <textarea id="contact_form_message" class="text_field contact_form_message" rows="4" placeholder="Your address"></textarea>
                                 </div>
 
-                <?php if (!$cart->has($singProduct['price'])): ?>
-
-                            <div class="contact_form_button">
+                                <div class="contact_form_button">
                                 <button type="submit" class="button contact_submit_button">Submit Order</button>
                             </div>
 
-<?php endif;?>
                         </form>
 
                     </div>

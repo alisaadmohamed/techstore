@@ -76,6 +76,14 @@ use TechStore\Classes\Models\Product;
 
 								</div>
 
+
+
+	
+
+
+
+
+
 								<div class="button_container">
 									<button type="submit"  name="submit" class="button cart_button">Add to Cart</button>
 								</div>

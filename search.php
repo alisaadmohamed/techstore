@@ -4,16 +4,20 @@
 
 use TechStore\Classes\Models\Product;
 
-if ($request->getHas('keyword')) {
+if (isset($request)) {
+    if ($request->getHas('keyword')) {
 
-    $keyword = $request->get('keyword');
+        $keyword = $request->get('keyword');
 
-} else {
-    $keyword = "";
+    } else {
+        $keyword = "";
+    }
 }
 
 $pro = new Product;
-$products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, img" );
+if (isset($keyword)) {
+    $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, img" );
+}
 
 
 ?>
@@ -24,7 +28,9 @@ $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, i
     <div class="home_background parallax-window" data-parallax="scroll" data-image-src="<?=URL;?>assets/images/shop_background.jpg"></div>
 		<div class="home_overlay"></div>
 		<div class="home_content d-flex flex-column align-items-center justify-content-center">
-			<h2 class="home_title">Search results for:<?php echo $keyword ?></h2>
+			<h2 class="home_title">Search results for:<?php if (isset($keyword)) {
+                    echo $keyword;
+                } ?></h2>
 		</div>
 	</div>
 
@@ -40,10 +46,12 @@ $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, i
 						<div class="sidebar_section">
 							<div class="sidebar_title">Categories</div>
 							<ul class="sidebar_categories">
-			<?php foreach($allCategory as $cat): ?>
+			<?php if (isset($allCategory)) {
+                foreach($allCategory as $cat): ?>
 
-								<li><a href="category.php?id=<?=$cat['id']?>"><?= $cat['name']?></a></li>
-							<?php endforeach; ?>
+                                    <li><a href="category.php?id=<?=$cat['id']?>"><?= $cat['name']?></a></li>
+                                <?php endforeach;
+            } ?>
 							</ul>
 						</div>
 
@@ -60,22 +68,24 @@ $products =  $pro->selectWhere("name LIKE  '%$keyword%' " , "id , name, price, i
 						<div class="product_grid">
 							<div class="product_grid_border"></div>
 
-            <?php  foreach ($products as $prod):  ?>
+            <?php if (isset($products)) {
+                foreach ($products as $prod):  ?>
 
-							<!-- Product Item -->
+                                <!-- Product Item -->
 
 
-                <div class="product_item">
-                    <div class="product_border"></div>
-                    <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="<?= URL;?>uploads/<?= $prod['img']?>" alt=""></div>
-                    <div class="product_content">
-                        <div class="product_price">$<?=$prod['price'];?></div>
-                        <div class="product_name"><div><a href="#" tabindex="0"><?=$prod['name'];?></a></div></div>
+                    <div class="product_item">
+                        <div class="product_border"></div>
+                        <div class="product_image d-flex flex-column align-items-center justify-content-center"><img src="<?= URL;?>uploads/<?= $prod['img']?>" alt=""></div>
+                        <div class="product_content">
+                            <div class="product_price">$<?=$prod['price'];?></div>
+                            <div class="product_name"><div><a href="<?= URL;?>product.php?id=<?=$prod['id'];?>" tabindex="0"><?=$prod['name'];?></a></div></div>
+                        </div>
+
                     </div>
-                    
-                </div>
 
-<?php   endforeach; ?>
+    <?php   endforeach;
+            } ?>
 						</div>
 				
 						<!-- Shop Page Navigation -->

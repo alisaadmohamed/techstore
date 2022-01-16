@@ -103,7 +103,7 @@ $cartTotal = $cart->total();
                                         <div class="cart_count"><span><?=$cardCount?></span></div>
                                     </div>
                                     <div class="cart_content">
-                                        <div class="cart_text"><a href="#">Cart</a></div>
+                                        <div class="cart_text"><a href="<?= URL;?>cart.php">Cart</a></div>
                                         <div class="cart_price">$<?=$cartTotal;?></div>
                                     </div>
                                 </div>
@@ -154,7 +154,7 @@ $cartTotal = $cart->total();
                                 <ul class="standard_dropdown main_nav_dropdown">
                                     <li><a href="<?=URL;?>">Home<i class="fas fa-chevron-down"></i></a></li>
                                     <li><a href="<?=URL;?>products.php">All products<i class="fas fa-chevron-down"></i></a></li>
-                                    <li><a href="#">Cart<i class="fas fa-chevron-down"></i></a></li>
+                                    <li><a href="<?= URL;?>cart.php">Cart<i class="fas fa-chevron-down"></i></a></li>
                                 </ul>
                             </div>
 
