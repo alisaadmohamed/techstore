@@ -39,7 +39,7 @@ if (!empty($request)) {
                 $session->set("errors", $validator->getErrors());
             }
             $request->redirect('cart.php');
-        } 
+        }
 
 
 
