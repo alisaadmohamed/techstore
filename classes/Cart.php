@@ -55,4 +55,27 @@ class Cart
 
     }
 
+
+
+    public function all() {
+
+        return $_SESSION['cart'];
+
+// if(! empty($_SESSION['cart'])){
+    
+// }else {
+
+//     return $_SESSION['cart'] = "";
+// }
+        
+    }
+
+
+
+        public function remove($id) {
+
+           unset($_SESSION['cart'][$id]);
+
+        }
+
 }

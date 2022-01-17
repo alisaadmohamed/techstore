@@ -5,28 +5,20 @@ class Validator
 {
     private $errors = [];
 
-    public function Validation($name, $value, array $rules)
+    public function validate(string $name, $value, array $rules)
     {
         foreach ($rules as $rule) {
 
-            $obj = new $rule;
+            $className = "TechStore\\Classes\\Validation\\" . $rule;
+         
+    // echo "BEFORE";
 
-            // if ($rule == 'requierd') {
-            //     $obj = new Requierd;
+            $obj = new $className;
+    // echo "AFTER";
+           
+            //  var_dump($obj);die;
 
-            // } elseif ($rule == 'numeric') {
-            //     $obj = new Numeric;
-
-            // } elseif ($rule == 'email') {
-            //     $obj = new Email;
-
-            // } elseif ($rule == 'max') {
-            //     $obj = new Max;
-
-            // } elseif ($rule == 'str') {
-            //     $obj = new Str;
-
-            // }
+           
 
             $error = $obj->check($name, $value);
             if ($error !== false) {
@@ -37,7 +29,7 @@ class Validator
         }
     }
 
-    public function getError()
+    public function getErrors()
     {
         return $this->errors;
     }
@@ -45,12 +37,7 @@ class Validator
     public function hasErrors(): bool
     {
 
-        if (empty($this->error)) {
-            return false;
-        } else {
-            return true;
-        }
-
+        return !empty($this->errors);
     }
 
 }

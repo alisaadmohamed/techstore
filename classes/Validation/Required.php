@@ -3,7 +3,7 @@
 namespace TechStore\Classes\Validation;
 
 
-class Requierd implements ValidationRule
+class  Required implements ValidationRule
 {
 
     public function check($name,$value)

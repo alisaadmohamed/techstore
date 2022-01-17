@@ -1,13 +1,15 @@
 <?php
 
-include "app.php";
 
+
+include "app.php";
+// use TechStore\classes\Validation\Validator;
 // $v = new Validator;
 // $v->Validation('age', '', [
-//     'requierd',
+//     'required',
 //     'numeric',
 
-// ]);
+//  ]);
 
 // echo "<pre>";
 // print_r($v->getError());
