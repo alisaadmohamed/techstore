@@ -39,10 +39,7 @@ if (!empty($request)) {
                 $session->set("errors", $validator->getErrors());
             }
             $request->redirect('cart.php');
-        } else {
-
-            
-        }
+        } 
 
 
 
@@ -50,25 +47,3 @@ if (!empty($request)) {
     }
 }
 
-// $Validator->Validation('name', $name, ['required', 'str', 'max']);
-// if (! empty($email)){
-
-//   $Validator->Validation('email', $email, ['email', 'max']);
-// }
-
-// $Validator->validation('phone', $phone, ['required', 'str', 'max']);
-
-// if (!empty($address)) {
-//     $Validator->validation('address', $address, ['str', 'max']);
-
-// }
-
-// if($Validator->hasErrors()) {
-
-//   if (!empty($session)) {
-//       $session->set('errors' , $Validator->getErrors());
-//   }
-// $request->redirect('cart.php');
-// } else {
-
-// }
