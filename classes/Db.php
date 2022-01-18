@@ -35,7 +35,7 @@ abstract class Db
         $res = mysqli_query($this->conn, $sql);
         return \mysqli_fetch_all($res, MYSQLI_ASSOC);
 
-      //  return mysqli_fetch_assoc($res);
+        //  return mysqli_fetch_assoc($res);
 
     }
 
@@ -53,6 +53,19 @@ abstract class Db
         return mysqli_query($this->conn, $sql);
 
     }
+
+
+
+    public function insertAndGetId($col, $values)
+    {
+        $sql = "INSERT INTO $this->table ($col) VALUES ($values)";
+         mysqli_query($this->conn, $sql);
+        return mysqli_insert_id($this->conn);
+
+    }
+
+
+  
 
     public function update($set, $id)
     {

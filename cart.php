@@ -2,17 +2,12 @@
 
 
 <?php
-use TechStore\Classes\Cart;
 use TechStore\Classes\Session;
-
 
 if (isset($cart)) {
     $products = $cart->all();
-    
+
 }
-
-
-
 
 ?>
     <!-- Cart -->
@@ -80,26 +75,24 @@ if (isset($cart)) {
                     <div class="contact_form_container">
                         <div class="contact_form_title">Fill in your info</div>
 
-                                  
+
                                     <?php if ($session->has('errors')): ?>
+
 
                                         <div class="alert alert-danger" >
 
-                                            <?php foreach($session->get("errors") as $error): ?>
+                                            <?php foreach ($session->get("errors") as $error): ?>
 
-                                                <p class="mb-0"><?= $error; ?></p>
+                                                <p class="mb-0"><?=$error;?></p>
 
-                                            <?php  endforeach;$session->remove('errors'); ?>
-
+                                            <?php endforeach;
+                                                $session->remove('errors');?>
                                         </div>
-
-                                        <?php endif; ?>
-                                  
-
+                                        <?php endif;?>
 
                         <form action="<?=URL;?>handler/add-order.php" method="POST" id="order_form">
                             <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
-                                
+
                                 <input type="text" name="name" id="contact_form_name" class="contact_form_name input_field" placeholder="Your name">
                                 <input type="text" name="email" id="contact_form_email" class="contact_form_email input_field" placeholder="Your email">
                                 <input type="text" name="phone" id="contact_form_phone" class="contact_form_phone input_field" placeholder="Your phone number">
