@@ -42,40 +42,47 @@ class Cart
 
     }
 
-    public function has($id)
+    public function has(string $id)
     {
 
-        if(!empty($id)) {
+        if (isset($_SESSION['cart'])) {
 
             return array_key_exists($id, $_SESSION['cart']);
 
-        } 
-
-        return ;
-
-    }
-
-
-
-    public function all() {
-
-        return $_SESSION['cart'];
-
-// if(! empty($_SESSION['cart'])){
-    
-// }else {
-
-//     return $_SESSION['cart'] = "";
-// }
-        
-    }
-
-
-
-        public function remove($id) {
-
-           unset($_SESSION['cart'][$id]);
-
+        } else {
+            return false ;
         }
 
+          
+
+    }
+
+    public function all()
+    {
+
+        if(isset( $_SESSION['cart'])) {
+            return $_SESSION['cart'];
+        } else {
+
+            return [];
+        }
+
+        
+
+    }
+
+    public function remove($id)
+    {
+
+        unset($_SESSION['cart'][$id]);
+
+    }
+
+    function empty() {
+
+        $_SESSION['cart'] = [];
+    }
+
 }
+
+

@@ -1,17 +1,13 @@
 <?php
 
 require_once '../app.php';
-require_once '../classes/Validation/Required.php';
-require_once '../classes/Validation/Email.php';
-require_once '../classes/Validation/Max.php';
-require_once '../classes/Validation/Str.php';
 
-use TechStore\Classes\Models\OrderDetails;
+use TechStore\Classes\Cart;
+use TechStore\Classes\Models\OrderDetail;
 use TechStore\Classes\Models\Orders;
-use TechStore\Classes\Validation\Cart;
 use TechStore\Classes\Validation\Validator;
-
-if ($request->postHas('submit')) {
+$cart = new Cart;
+if ($request->postHas('submit') && $cart->count() !== 0 ) {
 
     $name = $request->post('name');
     $email = $request->post('email');
@@ -19,39 +15,46 @@ if ($request->postHas('submit')) {
     $address = $request->post('address');
 
     $validator = new Validator;
-    $validator->validate('name', $name, ['required', 'Str', 'max']);
-
+    $validator->validate("name", $name, ['Required', 'Max', 'Str']);
     if (!empty($email)) {
-        $validator->validate('email', $email, ['email', 'Max']);
+        $validator->validate("email", $email, ['Email']);
+        $email = "'$email'";
+    } else {
+      $email = "null";
     }
 
-    $validator->validate('phone', $phone, ['required', 'Str']);
+    $validator->validate("phone", $phone, ['Required', 'Max', 'Str']);
 
     if (!empty($address)) {
-        $validator->validate('address', $address, ['Str', 'max']);
+
+        $validator->validate("address", $address, ['Max', 'Str']);
+        $address = "'$address'";
+    } else {
+      $address = "null";
     }
 
     if ($validator->hasErrors()) {
 
         $session->set("errors", $validator->getErrors());
-
-        $request->redirect('cart.php');
+        $request->redirect("cart.php");
 
     } else {
 
+        
         $order = new Orders;
-        $orderDetails = new OrderDetails;
-        $cart = new Cart;
+        $orderDetail = new OrderDetail;
+        $orderId = $order->insertAndGetId("name, email, phone, address", " '$name', $email , '$phone',  $address ");
+        
+        foreach ($cart->all() as $id => $products) {
+            $qty = $products['qua'];
+            $res = $orderDetail->insert("order_id, products_id, qty", " '$orderId', '$id', '$qty' ");
 
-        $orderId = $order->insertAndGetId("name , email , phone , address", "'$name' , '$email' , '$phone' , '$address'");
-
-        foreach ($cart->all() as $prodId => $products) {
-            $qty = $products['qty'];
-            $orderDetails->insert("order_id ,products_id , qty", "'$orderId' , '$prodId' , '$qty' ");
         }
-
-        $request->redirect('products.php');
-
+          $cart->empty();
+        $request->redirect("products.php");
     }
 
+} else {
+
+  $request->redirect("products.php");
 }

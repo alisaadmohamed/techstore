@@ -25,4 +25,14 @@ class Product extends Db
         return mysqli_fetch_assoc($res);
     }
 
+    public function selectAlll($col = "*")
+    {
+        $sql = "SELECT $col FROM $this->table JOIN cats ON $this->table.cat_id = cats.id
+          ORDER BY $this->table.id DESC";
+        $res = mysqli_query($this->conn, $sql);
+        return mysqli_fetch_all($res, MYSQLI_ASSOC);
+    }
+
+
+
 }

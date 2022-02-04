@@ -9,7 +9,9 @@ class Str implements ValidationRule
     if(! is_string($value)) {
 
       return " $name must be String ";
-    } return false;
+    } 
+    
+    return false;
 
   }
 

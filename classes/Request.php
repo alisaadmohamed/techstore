@@ -15,6 +15,15 @@ class Request
         return $_POST[$key];
     }
 
+
+    public function files(string $key)
+    {
+
+        return $_FILES[$key];
+    }
+
+
+
     public function postClean($key)
     {
 
@@ -36,6 +45,13 @@ class Request
 
     public  function redirect($path) {
         header("location: ". URL.  $path);
+
+    }
+
+
+
+    public  function aredirect($path) {
+        header("location: ". AURL.  $path);
 
     }
 

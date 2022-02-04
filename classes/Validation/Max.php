@@ -8,7 +8,9 @@ class Max implements ValidationRule
     if(strlen($value) > 255) {
 
       return "$name must be less than 255 ";
-    } return false;
+    }
+    
+    return false;
 
   }
 

@@ -3,7 +3,14 @@
 
 //path & url
 define("PATH" , __DIR__ . "/");
-define("URL" , "http://localhost/techstore/");
+define("URL" , "http://localhost/TechStore/");
+
+// For Admin
+
+
+define("APATH" , __DIR__ . "/admin/");
+define("AURL" , "http://localhost/TechStore/admin/");
+
 
 
 //DB

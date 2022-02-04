@@ -4,6 +4,8 @@
 <?php
 use TechStore\Classes\Session;
 
+$session = new Session;
+
 if (isset($cart)) {
     $products = $cart->all();
 
@@ -19,39 +21,40 @@ if (isset($cart)) {
                     <div class="cart_container">
                         <div class="cart_title">Shopping Cart</div>
                         <div class="cart_items">
-                            <ul class="cart_list">
+
+                            <?php if(isset($_SESSION['cart'])): ?>
                                 <?php foreach ($cart->all() as $id => $products): ?>
-                                <li class="cart_item clearfix">
-                                    <div class="cart_item_image"><img src="<?=URL;?>/uploads/<?=$products['img']?>" alt=""></div>
-                                    <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                        <div class="cart_item_name cart_info_col">
-                                            <!-- <div class="cart_item_title">Name</div> -->
-                                            <div class="cart_item_text"><?=$products['name']?></div>
-                                        </div>
-                                        <div class="cart_item_quantity cart_info_col">
-                                            <!-- <div class="cart_item_title">Quantity</div> -->
-                                            <div class="cart_item_text"><?=$products['qua']?></div>
-                                        </div>
-                                        <div class="cart_item_price cart_info_col">
-                                            <!-- <div class="cart_item_title">Price</div> -->
-                                            <div class="cart_item_text">$<?=$products['price']?></div>
-                                        </div>
-                                        <div class="cart_item_total cart_info_col">
-                                            <!-- <div class="cart_item_title">Total</div> -->
-                                            <div class="cart_item_text">$<?=$products['price'] * $products['qua']?></div>
-                                        </div>
-                                        <div class="cart_item_action cart_info_col">
-                                            <div class="cart_item_title">Remove</div>
-                                            <div class="cart_item_text">
-                                                <a href="<?=URL . "handler/removeCard.php?id=" . $id;?>">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                    <li class="cart_item clearfix">
+                                        <div class="cart_item_image"><img src="<?=URL;?>/uploads/<?=$products['img']?>" alt=""></div>
+                                        <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
+                                            <div class="cart_item_name cart_info_col">
+                                                <!-- <div class="cart_item_title">Name</div> -->
+                                                <div class="cart_item_text"><?=$products['name']?></div>
+                                            </div>
+                                            <div class="cart_item_quantity cart_info_col">
+                                                <!-- <div class="cart_item_title">Quantity</div> -->
+                                                <div class="cart_item_text"><?=$products['qua']?></div>
+                                            </div>
+                                            <div class="cart_item_price cart_info_col">
+                                                <!-- <div class="cart_item_title">Price</div> -->
+                                                <div class="cart_item_text">$<?=$products['price']?></div>
+                                            </div>
+                                            <div class="cart_item_total cart_info_col">
+                                                <!-- <div class="cart_item_title">Total</div> -->
+                                                <div class="cart_item_text">$<?=$products['price'] * $products['qua']?></div>
+                                            </div>
+                                            <div class="cart_item_action cart_info_col">
+                                                <div class="cart_item_title">Remove</div>
+                                                <div class="cart_item_text">
+                                                    <a href="<?=URL . "handler/removeCard.php?id=" . $id;?>">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
+                                    </li>
                                 <?php endforeach;?>
-                            </ul>
+                            <?php endif;?>
                         </div>
 
                         <!-- Order Total -->
@@ -75,22 +78,19 @@ if (isset($cart)) {
                     <div class="contact_form_container">
                         <div class="contact_form_title">Fill in your info</div>
 
+                                <?php  if($session->has("errors")): ?> 
+                                    <div class="alert alert-danger">
+                                    <?php  foreach($session->get("errors") as $error): ?>
+                                        
+                                        <p class="mb-0"><?= $error;?></p>
 
-                                    <?php if ($session->has('errors')): ?>
+                                    <?php endforeach;  $session->remove('errors');  ?>
 
+                                    </div>
 
-                                        <div class="alert alert-danger" >
-
-                                            <?php foreach ($session->get("errors") as $error): ?>
-
-                                                <p class="mb-0"><?=$error;?></p>
-
-                                            <?php endforeach;
-                                                $session->remove('errors');?>
-                                        </div>
-                                        <?php endif;?>
-
-                        <form action="<?=URL;?>handler/add-order.php" method="POST" id="order_form">
+                                    
+                                   <?php endif;  ?>
+                        <form  method="POST"  action="<?=URL;?>handler/add-order.php"  id="order_form">
                             <div class="contact_form_inputs d-flex flex-md-row flex-column justify-content-between align-items-between">
 
                                 <input type="text" name="name" id="contact_form_name" class="contact_form_name input_field" placeholder="Your name">

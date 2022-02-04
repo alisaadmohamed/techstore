@@ -7,6 +7,6 @@ namespace TechStore\Classes\Validation;
 
 interface ValidationRule
 {
-    public function check($name, $value);
+    public function check(string $name, $value);
 
 }

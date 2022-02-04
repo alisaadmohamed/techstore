@@ -10,14 +10,11 @@ class Validator
         foreach ($rules as $rule) {
 
             $className = "TechStore\\Classes\\Validation\\" . $rule;
-         
-    // echo "BEFORE";
+
+        
 
             $obj = new $className;
-    // echo "AFTER";
-           
-            //  var_dump($obj);die;
-
+  
            
 
             $error = $obj->check($name, $value);
@@ -29,15 +26,23 @@ class Validator
         }
     }
 
-    public function getErrors()
+
+
+    public function getErrors() : array
     {
-        return $this->errors;
+       return  $this->errors;
     }
 
+   
     public function hasErrors(): bool
     {
+        if(empty($this->errors)) {
+                return false;
+        } else {
+            return true;
+        }
 
-        return !empty($this->errors);
+        // return ! empty($this->errors);
     }
 
 }

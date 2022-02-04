@@ -55,15 +55,13 @@ abstract class Db
     }
 
 
-
     public function insertAndGetId($col, $values)
     {
         $sql = "INSERT INTO $this->table ($col) VALUES ($values)";
          mysqli_query($this->conn, $sql);
-        return mysqli_insert_id($this->conn);
+         return mysqli_insert_id($this->conn);
 
     }
-
 
   
 
